@@ -1,0 +1,5 @@
+# Ignorar archivos compilados
+#*.pyc
+
+# Ignorar directorio de entorno virtual
+env/
