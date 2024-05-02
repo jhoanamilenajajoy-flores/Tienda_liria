@@ -1,20 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Liria</title>
-    <link rel="stylesheet" href="static/css/styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Bienvenido a Tienda Liria</h1>
-        <div class="buttons">
-            <button class="btn">Inicio</button>
-            <button class="btn">Informes</button>
-            <button class="btn">Proveedores</button>
-            <button class="btn">Clientes</button>
-        </div>
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tienda Liria</title>
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/css/styles.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+        <style>
+            body {
+                background-image: url('/static/images/fondo-6.jpg');
+                background-size: cover; /* Para que la imagen de fondo cubra toda la pantalla */
+                background-position: center; /* Para centrar la imagen de fondo */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid full-height">
+            <div class="row h-100">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center">
+                    <div class="row py-5">
+                        <div class="mb-3 d-flex justify-content-center">
+                            <button type="button" class="btn btn-light btn-lg">Lista</button>
+                        </div>
+                    </div>
+                    <div class="row py-5">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <a href="/informes_venta"><button type="button" class="btn btn-light btn-lg">Informes</button></a>
+                        </div>
+                    </div>  
+                    <div class="row py-5">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <button type="button" class="btn btn-light btn-lg">Proveedores</button>
+                        </div>
+                    </div>                                           
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <div class="row d-flex align-items-center justify-content-center" style="height: 100vh;">
+                        <div class="text-center">
+                            <h1 class="mx-auto mb-0">Tienda Liria</h1>
+                            <img src="/static/images/tres.jpeg" class="rounded mx-auto mt-3" alt="Imagen Uno">
+                        </div>
+                    </div>
+                </div>                   
+                </div> 
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 text-left">
+                    <div class="row py-5">                      
+                        <div class="mb-3 d-flex justify-content-center">
+                            <a href="/iniciar"><button type="button" class="btn btn-secondary btn-lg btn-inicio">Inicio</button></a>                          
+                        </div>
+                    </div>
+                </div>  
+            </div>       
+        </div> 
+    </body>
 </html>
+
+
