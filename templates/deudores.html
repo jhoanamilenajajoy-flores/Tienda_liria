@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Liria - Clientes Deudores</title>
+  <link rel="stylesheet" href="static/css/deudores.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#" class="logo">Tienda Liria</a>
+      <form action="#">
+        <input type="text" placeholder="Buscar cliente" id="search-input">
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </nav>
+  </header>
+
+  <main>
+    <section class="table-section">
+      <h2>Clientes Deudores</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Última Fecha</th>
+            <th>Debe</th>
+            <th>Abono</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr>
+            <td>Joana Jajoy</td>
+            <td>3172897737</td>
+            <td>9/05/2024</td>
+            <td>$50.000</td>
+            <td><a href="/abonar"><button class="abonar">Abonar</button></a></td> </tr>
+            
+          </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

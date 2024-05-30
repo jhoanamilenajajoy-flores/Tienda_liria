@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte Diario de Ventas</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/styles.css">
+    <style>
+        body {
+            background-image: url('/static/images/paper-color.png');
+            background-size: cover; /* Para que la imagen de fondo cubra toda la pantalla */
+            background-position: center; /* Para centrar la imagen de fondo */
+        }
+    </style>
 </head>
 <body>
+    {% include 'navbar.html' %}  
     <div class="container">
-        <h1>Reporte Diario de Ventas</h1>
-        <table>
-            <tr>
-                <th>Días</th>
-                <th>Ventas</th>
-            </tr>
+        <h1 >Reporte Diario de Ventas</h1>
+        <table class=" table table-color">
+            <thead class="table-dark">
+                <tr>
+                    <th>Días</th>
+                    <th>Ventas</th>
+                </tr>
+            </thead>           
             <tr>
                 <td><a href="dia_semana">Lunes</a></td>
                 <td>$500</td> <!-- Aquí iría el saldo de las ventas del lunes -->
@@ -49,6 +60,9 @@
                 <td>$6300</td> <!-- Ejemplo: suma de todas las ventas -->
             </tr>
         </table>
+    </div>
+    <div class="btn-atras">
+        <a href="/informes_venta"><button class="btn btn-secondary btn-lg">Atrás</button></a>
     </div>
 </body>
 </html>

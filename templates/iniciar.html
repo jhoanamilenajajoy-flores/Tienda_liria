@@ -3,65 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/styles.css">
-    <style>
-        body {
-            background-image: url('/static/images/fondo-2.jpg');
-            /* Ajusta el tamaño y la posición de la imagen de fondo según sea necesario */
-            background-size: cover;
-            background-position: center;
-            /* Asegúrate de que el contenido esté por encima del fondo */
-            z-index: 0;
-        }
-    </style>
 </head>
 <body>
+    {% include 'navbar.html' %}
+
     <div class="container">
-        <table class="table my-5">
-            <thead class="table-dark">
-                <tr><!--fila -->
-                    <th>Nombre del producto</th><!--celdas de encabezado  -->
-                    <th>cantidad</th>
-                    <th>Precio Unitario + IVA</th>
-                    <th>Precio Total</th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Juan</td><!--celdas-->
-                <td>25</td>
-                <td>Madrid</td>
-            </tr>
-            </tbody>
-        </table>
         <div class="row">
-            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center">
-                <h2>holi</h2>
+            <div class="table-container">
+                <table class="table mt-5">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nombre del producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario + IVA</th>
+                            <th>Precio Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="productosSeleccionados"></tbody>
+                </table>
             </div>
-            <div class="col-sm-2 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center">
-                <h2>holi</h2>
-            </div>
-            <div class="col-sm-2 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center">
-                <h2>holi</h2>
-            </div>
-            <div class="col-sm-2 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center">
-                <h2>holi</h2>
-            </div>
-            <div class="col-sm-2 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center">
-                <h2>holi</h2>
-            </div>            
         </div>
-        <table class="table">
-            <thead class="table-dark">
-                <tr><!--fila -->
-                    <th>busqueda</th><!--celdas de encabezado  -->
-                    <th>lupa</th>
- 
-                </tr>
-            </thead>
-        </table>
+
+        <div class="row my-1">
+            <div class="col-lg-4 offset-lg-4 col-md-4 offset-md-3 col-sm-6 offset-sm-3">
+                <input id="subtotal" type="text" class="form-control" placeholder="Subtotal" readonly>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <input id="total" type="text" class="form-control" placeholder="Total" readonly>
+            </div>
+        </div>
+
+        <div class="row my-1">
+            <div class="col text-end">
+                <button type="button" class="btn btn-light btn-sm" onclick="mostrarPopup()">Vender</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand">Búsqueda del producto</a>
+                    <form class="d-flex" onsubmit="buscarProducto(); return false;" role="search">
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Buscar por código o nombre" aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </nav>
+
+            <div class="table-container">
+                <table id="productosTable" class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in productos %}
+                        <tr id="producto{{ loop.index }}">
+                            <td>{{ producto[1] }}</td>
+                            <td>{{ producto[0] }}</td>
+                            <td>{{ producto[2] }}</td>
+                            <td><button class="btn btn-primary btn-sm" onclick="agregarProducto('{{ producto[1] }}', '{{ producto[0] }}', '{{ producto[2] }}')">Agregar</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="popup" class="popup hidden">
+            <label for="valorCobrar">Valor a cobrar:</label>
+            <input type="number" id="valorCobrar" class="form-control" readonly><br><br>
+            <label for="valorRecibido">Valor recibido:</label>
+            <input type="number" id="valorRecibido" class="form-control"><br><br>
+            <button class="btn btn-primary" onclick="calcularCambio()">Calcular Cambio</button>
+            <button class="btn btn-secondary" onclick="cerrarPopup()">Cerrar</button>
+            <div id="cambio" style="margin-top: 10px; font-size: 18px; font-weight: bold;"></div>
+            <form action="/generar_pdf" method="post">
+                <input type="hidden" name="productos" id="productosInput">
+                <input type="hidden" name="subtotal" id="subtotalInput">
+                <input type="hidden" name="total" id="totalInput">
+                <button type="submit" class="btn btn-primary">Generar PDF del recibo</button>
+            </form>
+        </div>
+        <div id="overlay" class="overlay hidden"></div>
     </div>
+
+    <script>
+        var filasAgregadas = [];
+
+        document.getElementById('searchInput').addEventListener('input', function() {
+            var searchText = this.value.toLowerCase();
+            var table = document.getElementById('productosTable');
+            var rows = table.getElementsByTagName('tr');
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var codigo = row.cells[0].textContent.toLowerCase();
+                var nombre = row.cells[1].textContent.toLowerCase();
+                row.style.display = (codigo.includes(searchText) || nombre.includes(searchText)) ? '' : 'none';
+            }
+            filasAgregadas.forEach(function(row) {
+                row.style.display = '';
+            });
+        });
+
+        function agregarProducto(codigo, nombre, precio) {
+            var primeraTabla = document.getElementById('productosSeleccionados');
+            var rows = primeraTabla.getElementsByTagName('tr');
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                if (row.cells[0].innerHTML === nombre) {
+                    var cantidad = parseInt(row.cells[1].innerHTML) + 1;
+                    row.cells[1].innerHTML = cantidad;
+                    row.cells[3].innerHTML = (cantidad * parseFloat(row.cells[2].innerHTML)).toFixed(2);
+                    actualizarPrecioTotal();
+                    return;
+                }
+            }
+            var newRow = primeraTabla.insertRow();
+            newRow.innerHTML = `<td>${nombre}</td><td>1</td><td>${precio}</td><td>${precio}</td><td><button class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">Eliminar</button></td>`;
+            filasAgregadas.push(newRow);
+            actualizarPrecioTotal();
+        }
+
+        function eliminarProducto(button) {
+            var row = button.parentNode.parentNode;
+            var cantidad = parseInt(row.cells[1].innerHTML) - 1;
+            if (cantidad > 0) {
+                row.cells[1].innerHTML = cantidad;
+                row.cells[3].innerHTML = (cantidad * parseFloat(row.cells[2].innerHTML)).toFixed(2);
+            } else {
+                row.parentNode.removeChild(row);
+                filasAgregadas = filasAgregadas.filter(r => r !== row);
+            }
+            actualizarPrecioTotal();
+        }
+
+        function actualizarPrecioTotal() {
+            var total = 0;
+            var rows = document.getElementById('productosSeleccionados').getElementsByTagName('tr');
+            for (var i = 0; i < rows.length; i++) {
+                total += parseFloat(rows[i].cells[3].innerHTML);
+            }
+            document.getElementById('subtotal').value = total.toFixed(2);
+            document.getElementById('total').value = total.toFixed(2);
+        }
+
+        function buscarProducto() {
+            var searchText = document.getElementById('searchInput').value.toLowerCase();
+            var rows = document.getElementById('productosTable').getElementsByTagName('tr');
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                var codigo = row.cells[0].textContent.toLowerCase();
+                var nombre = row.cells[1].textContent.toLowerCase();
+                row.style.display = (codigo.includes(searchText) || nombre.includes(searchText)) ? '' : 'none';
+            }
+            filasAgregadas.forEach(function(row) {
+                row.style.display = '';
+            });
+        }
+
+        function mostrarPopup() {
+            var overlay = document.getElementById('overlay');
+            var popup = document.getElementById('popup');
+            var totalCobrar = parseFloat(document.getElementById('total').value);
+            document.getElementById('valorCobrar').value = totalCobrar.toFixed(2);
+            overlay.classList.remove('hidden');
+            popup.classList.remove('hidden');
+        }
+
+        function cerrarPopup() {
+            var overlay = document.getElementById('overlay');
+            var popup = document.getElementById('popup');
+            overlay.classList.add('hidden');
+            popup.classList.add('hidden');
+            document.getElementById('cambio').innerText = '';  // Limpiar el cambio al cerrar
+        }
+
+        function calcularCambio() {
+            var valorCobrar = parseFloat(document.getElementById('valorCobrar').value);
+            var valorRecibido = parseFloat(document.getElementById('valorRecibido').value);
+            var cambio = valorRecibido - valorCobrar;
+            var cambioElement = document.getElementById('cambio');
+            if (!isNaN(cambio) && cambio >= 0) {
+                cambioElement.innerText = 'Cambio: $' + cambio.toFixed(2);
+            } else {
+                cambioElement.innerText = 'Valor recibido insuficiente';
+            }
+        }
+
+        document.getElementById('popup').addEventListener('submit', function() {
+            var productos = [];
+            var rows = document.getElementById('productosSeleccionados').getElementsByTagName('tr');
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var nombre = row.cells[0].innerHTML;
+                var cantidad = row.cells[1].innerHTML;
+                var precioUnitario = row.cells[2].innerHTML;
+                var precioTotal = row.cells[3].innerHTML;
+                productos.push({ nombre: nombre, cantidad: cantidad, precioUnitario: precioUnitario, precioTotal: precioTotal });
+            }
+            document.getElementById('productosInput').value = JSON.stringify(productos);
+            document.getElementById('subtotalInput').value = document.getElementById('subtotal').value;
+            document.getElementById('totalInput').value = document.getElementById('total').value;
+        });
+    </script>
 </body>
 </html>

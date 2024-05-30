@@ -1,34 +1,140 @@
-
-/*Index principal-booostrap*/
-.btn {
-width:150px;
-height:50px;
+body {
+    background-image: url('/static/images/paper-color.png');
+    background-size: cover;
+    background-position: center;
 }
+
+/* Definición del color personalizado */
+.overcast-color {
+    background-color: #b1a0aa; /* Color overcast navbar */
+    width: 100%; /* Ancho completo */
+}
+
+/* Definición del color personalizado para la tabla */
+.table-color { 
+    background-color: #c002a6; /* Color coa9bd */
+}
+
+/* Index principal-bootstrap */
+.btn {
+    width: 150px;
+    height: 50px;
+}
+
 /* Establece la altura al 100% de la altura de la ventana del navegador */
 .full-height {
     height: 100vh; 
 }
-/*boton inicio */
+
+/* Botón inicio */
 .btn-inicio {
     position: absolute;
     bottom: 10px; /* Ajusta el valor según sea necesario */
-    right:10px; /* Ajusta el valor según sea necesario */
+    right: 10px; /* Ajusta el valor según sea necesario */
 }
-/*Titulo tienda liria*/
+
+/* Titulo tienda liria */
 h1 {
-    font-size: 5em; /* Tamaño de fuente grande */
+    font-weight: bold !important; /* Negrita */
+    font-family: Arial, sans-serif; /* Tipo de letra */
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    color: rgb(0, 0, 0) !important;
+    margin-top: 20px !important; /* Agrega espacio en la parte superior */
+    margin-bottom: 20px !important; /* Agrega espacio en la parte inferior */
+   /* height: 100vh; Altura igual a la altura de la pantalla */
+}
+
+h2 {
+    font-size: 6em; /* Tamaño de fuente grande */
     font-weight: bold; /* Negrita */
     font-family: 'Boogaloo', cursive; /* Tipo de letra */
     display: flex;
     justify-content: center; /* Centrar horizontalmente */
     align-items: center; /* Centrar verticalmente */
-    color: rgb(0, 7, 85);
-   /*  height: 100vh; Altura igual a la altura de la pantalla */
-}
-/* Estilos para informe_venta.html */
-.fondo{
-    background-image:url(/fondo-1.jpg);
-    height: 50vh;
-
+    color: rgb(12, 12, 12);
+   /* height: 100vh; Altura igual a la altura de la pantalla */
 }
 
+/* Estilos específicos para el botón "Atrás" */
+.btn-atras {
+    background-color: #b1a0aa;
+    position: fixed; /* Fija la posición del botón */
+    bottom: 20px; /* Espacio desde el borde inferior */
+    right: 20px; /* Espacio desde el borde derecho */
+    z-index: 9999; /* Coloca el botón encima de otros elementos */
+}
+
+/* Estilos para filas impares */
+.table-color tr:nth-child(odd) {
+    background-color: #c002a6; /* Color para las filas impares */
+}
+
+/* Estilos para filas pares */
+.table-color tr:nth-child(even) {
+    background-color: #f7f7f7; /* Color para las filas pares */
+}
+
+/* Tabla productos */
+.table-container {
+    max-height: 400px; /* Ajusta esta altura según tu diseño */
+    overflow-y: auto; /* Habilita la barra de desplazamiento vertical cuando sea necesario */
+    border: 1px solid #ddd; /* Opcional: añade un borde para distinguir el área */
+    margin-bottom: 20px; /* Espacio debajo de cada tabla */
+}
+
+/* Ventana emergente */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Estilo personalizado para el navbar */
+.navbar-custom {
+    background-color: #b1a0aa; /* Color de fondo personalizado */
+    width: 100%; /* Ancho completo */
+    padding: 10px 15px; /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Asegúrate de que los elementos dentro del navbar se ajusten correctamente */
+.navbar-custom .container-fluid {
+    max-width: 100%;
+    padding: 0;
+}
+
+.navbar-custom .navbar-brand {
+    margin-left: 15px; /* Ajusta según sea necesario */
+}
+
+.navbar-custom .navbar-nav .nav-item .nav-link {
+    color: #fff; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno */
+}
+
+.navbar-custom .navbar-nav .nav-item .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Efecto hover */
+    border-radius: 5px; /* Esquinas redondeadas */
+}

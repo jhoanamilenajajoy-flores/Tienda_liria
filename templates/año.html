@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte Anual de Ventas</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/styles.css">
+    <style>
+        body {
+            background-image: url('/static/images/paper-color.png');
+            background-size: cover; /* Para que la imagen de fondo cubra toda la pantalla */
+            background-position: center; /* Para centrar la imagen de fondo */
+        }
+    </style>
 </head>
 <body>
+    {% include 'navbar.html' %}  
     <div class="container">
-        <h1>Reporte Anual de Ventas</h1>
-        <table>
-            <tr>
-                <th>Año</th>
-                <th>Ventas</th>
-            </tr>
+        <h1 class="text-center">Reporte Anual de Ventas</h1>
+        <table class="table my-5">
+            <thead class="table-dark">
+                <tr>
+                    <th>Año</th>
+                    <th>Ventas</th>
+                </tr>
+            </thead>
             <tr>
                 <td>2022</td>
                 <td>$100000</td> <!-- Aquí iría el saldo de las ventas del año 2022 -->
@@ -41,6 +52,9 @@
                 <td>$700000</td> <!-- Ejemplo: suma de todas las ventas -->
             </tr>
         </table>
+    </div>
+    <div class="btn-atras">
+        <a href="/informes_venta"><button class="btn btn-secondary btn-lg">Atrás</button></a>
     </div>
 </body>
 </html>

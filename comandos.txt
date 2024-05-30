@@ -1,0 +1,11 @@
+pip freeze- para vertodo lo que necesita
+pip install -r requirements.txt
+python mange.py createsuperuser
+
+https://mybrandnewlogo.com/es/generador-de-paleta-de-colores
+06. Apagado y Minimalista
+https://www.canva.com/es_mx/aprende/50-paletas-colores-visualmente-impactantes-que-inspiran/
+#D5D5D5         rgb(213, 213, 213)
+#9099A2         rgb(144, 153, 162)
+#6D7993         rgb(109, 121, 147)
+#69858F         rgb(105, 133, 143)

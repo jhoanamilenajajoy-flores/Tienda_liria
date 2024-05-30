@@ -4,16 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informe de Ventas</title>
-    <link rel="stylesheet" href="../static/css/styles.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        body {
+            background-image: url('/static/images/paper-color.png');
+            background-size: cover;
+            background-position: center;
+            /* Asegúrate de que el contenido esté por encima del fondo */
+            z-index: 0;
+        }
+    </style>
+
 </head>
 <body>
-    <div class="container">
-        <h1>Generar Informe de Ventas</h1>
-        <div class="buttons">
-            <a href="/dia"><button class="btn">Día</button></a>
-            <a href="/mes"><button class="btn">Mes</button></a>
-            <a href="/año"><button class="btn">Año</button></a>
-        </div>
+    {% include 'navbar.html' %}  
+    <div class="container full-height">
+        <div class="row">
+            <h1 class="my-4">Reporte por día</h1>
+            <div class="row my-5">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center text-center">
+                    <a href="/dia"><button type="button" class="btn btn-light btn-lg">Día</button></a>                                
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center text-center">
+                    <a href="/mes"><button type="button" class="btn btn-light btn-lg">Mes</button></a>
+                </div>                   
+                
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 h-100 d-flex flex-column justify-content-center text-center">
+                    <a href="/año"><button type="button" class="btn btn-light btn-lg">Año</button></a>
+                </div>  
+            </div>
+        </div> 
+    </div>
+    <div class="btn-atras text-center">
+        <a href="/"><button class="btn btn-outline-light">Atrás</button></a>
     </div>
 </body>
 </html>
