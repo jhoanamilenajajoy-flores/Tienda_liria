@@ -1,0 +1,60 @@
+/* Navbar */
+.navbar {
+    background-color: #b1a0aa;;
+    padding: 15px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+.navbar-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.2em;
+    margin-right: 20px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ddd;
+}
+
+/* Resto de estilos */
+body {
+    background-color: #f8f9fa;
+}
+
+.table-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table-dark {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.btn-sm {
+    font-size: 1em;
+    padding: 10px 20px;
+}
+
+.popup {
+    /* Estilos para el popup */
+}

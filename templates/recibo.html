@@ -10,8 +10,19 @@
             margin: 20px;
         }
         h1 {
+            font-size: 1em; /* Tamaño de fuente grande */
             text-align: center;
         }
+        h2 {
+        font-size: 2em; /* Tamaño de fuente grande */
+        font-weight: bold; /* Negrita */
+        font-family: 'Pacifico', cursive; /* Tipo de letra cursiva atractiva */
+        text-align: center; /* Centrar el texto */
+        color: rgb(12, 12, 12);
+        margin-top: 20px; /* Espacio en la parte superior */
+        margin-bottom: 20px; /* Espacio en la parte inferior */
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -34,9 +45,10 @@
     </style>
 </head>
 <body>
+    <h1>Bienvenido a</h1>
+    <h2>Tienda Liria</h2>
     <h1>Recibo de venta</h1>
-    <p>Fecha: {{ fecha }}</p>
-    <p>Nombre de la tienda: {{ nombre_tienda }}</p>
+
 
     <table>
         <thead>
@@ -61,9 +73,10 @@
 
     <p class="total">Subtotal: ${{ subtotal }}</p>
     <p class="total">Total: ${{ total }}</p>
-
+    <p>Impresa el {{ fecha }}</p>
     <div class="footer">
         <p>Gracias por su compra</p>
+        <h1>(❁´◡`❁)</h1>
     </div>
 </body>
 </html>

@@ -1,0 +1,41 @@
+body {
+    background-image: url('/static/images/liria6.webp');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Roboto', sans-serif; /* Fuente general */
+}
+
+.btn {
+    width: 200px; /* Aumentar el tamaño del botón */
+    height: 60px; /* Aumentar la altura del botón */
+    font-size: 1.2em; /* Tamaño de fuente más grande */
+    font-weight: bold;
+    border-radius: 10px; /* Bordes redondeados */
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
+}
+
+.btn:hover {
+    background-color: #ddd; /* Color de fondo al pasar el ratón */
+    transform: scale(1.05); /* Aumentar el tamaño al pasar el ratón */
+}
+
+.full-height {
+    height: 100vh; 
+}
+
+.btn-inicio {
+    position: absolute;
+    bottom: 20px; /* Ajusta el valor según sea necesario */
+    right: 20px; /* Ajusta el valor según sea necesario */
+    font-size: 1.2em; /* Tamaño de fuente más grande */
+}
+
+h2 {
+    font-size: 8em; /* Tamaño de fuente grande */
+    font-weight: bold; /* Negrita */
+    font-family: 'Pacifico', cursive; /* Tipo de letra cursiva atractiva */
+    text-align: center; /* Centrar el texto */
+    color: rgb(12, 12, 12);
+    margin-top: 20px; /* Espacio en la parte superior */
+    margin-bottom: 20px; /* Espacio en la parte inferior */
+}
