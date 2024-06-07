@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/guardarproducto.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <main>
+        <section class="formulario">
+            <h1>Agregar producto</h1>
+            <form id="productoForm" enctype="multipart/form-data">
+                <div class="imagen">
+                    <img src="static/images/imagen_producto.jpg" alt="Imagen del producto">
+                    <input type="file" id="imagenProducto" name="imagenProducto" required>
+                    <label for="imagenProducto">Seleccionar imagen</label>
+                </div>
+
+                <div class="datos-producto">
+                    <label for="nombreProducto">Nombre del producto:</label>
+                    <input type="text" id="nombreProducto" name="nombreProducto" required>
+
+                    <label for="codigoProducto">Código de producto:</label>
+                    <input type="text" id="codigoProducto" name="codigoProducto" required>
+
+                    <label for="precioProducto">Precio:</label>
+                    <input type="number" step="0.01" id="precioProducto" name="precioProducto" required>
+
+                    <label for="cantidadProducto">Cantidad:</label>
+                    <input type="number" id="cantidadProducto" name="cantidadProducto" required>
+
+                    <label for="disponibilidadProducto">Disponibilidad:</label>
+                    <select id="disponibilidadProducto" name="disponibilidadProducto" required>
+                        <option value="1">Disponible</option>
+                        <option value="0">Agotado</option>
+                        <option value="2">En camino</option>
+                    </select>
+
+                    <label for="proveedorProducto">Proveedor:</label>
+                    <select id="proveedorProducto" name="proveedorProducto" required>
+                        {% for proveedor in proveedores %}
+                        <option value="{{ proveedor[0] }}">{{ proveedor[1] }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="categoriaProducto">Categoría:</label>
+                    <select id="categoriaProducto" name="categoriaProducto" required>
+                        {% for categoria in categorias %}
+                        <option value="{{ categoria[0] }}">{{ categoria[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit">Guardar producto</button>
+            </form>
+            <div id="mensaje"></div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+    <script>
+        document.getElementById('productoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let formData = new FormData(this);
+
+            fetch('/agregar_producto', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                let mensajeDiv = document.getElementById('mensaje');
+                if (data.message) {
+                    mensajeDiv.textContent = data.message;
+                    mensajeDiv.style.color = "green";
+                } else {
+                    mensajeDiv.textContent = "Error al guardar el producto";
+                    mensajeDiv.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                let mensajeDiv = document.getElementById('mensaje');
+                mensajeDiv.textContent = "Error al guardar el producto";
+                mensajeDiv.style.color = "red";
+            });
+        });
+    </script>
+</body>
+</html>

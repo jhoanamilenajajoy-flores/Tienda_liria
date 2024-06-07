@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos para el Hogar</title>
+    <link rel="stylesheet" href="static/css/alimentacion.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <nav>
+        <h1>Productos para el Hogar</h1>
+    </nav>
+
+    <section class="productos">
+        <div class="contenedor-productos">
+            {% for producto in productos %}
+            <div class="producto">
+                <img src="{{ url_for('static', filename='images/' ~ producto[2]) }}" alt="{{ producto[0] }}">
+                <h3>{{ producto[0] }}</h3>
+                <p class="precio">${{ producto[1] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>

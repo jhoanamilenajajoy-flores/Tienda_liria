@@ -123,7 +123,7 @@
                 if (row.cells[0].innerHTML === nombre) {
                     var cantidad = parseInt(row.cells[1].innerHTML) + 1;
                     row.cells[1].innerHTML = cantidad;
-                    row.cells[3].innerHTML = (cantidad * parseFloat(row.cells[2].innerHTML)).toFixed(2);
+                    row.cells[3].innerHTML = (cantidad * parseFloat(row.cells[2].innerHTML)).toFixed(0);
                     actualizarPrecioTotal();
                     return;
                 }
@@ -139,7 +139,7 @@
             var cantidad = parseInt(row.cells[1].innerHTML) - 1;
             if (cantidad > 0) {
                 row.cells[1].innerHTML = cantidad;
-                row.cells[3].innerHTML = (cantidad * parseFloat(row.cells[2].innerHTML)).toFixed(2);
+                row.cells[3].innerHTML = (cantidad * parseFloat(row.cells[2].innerHTML)).toFixed(0);
             } else {
                 row.parentNode.removeChild(row);
                 filasAgregadas = filasAgregadas.filter(r => r !== row);
@@ -153,8 +153,8 @@
             for (var i = 0; i < rows.length; i++) {
                 total += parseFloat(rows[i].cells[3].innerHTML);
             }
-            document.getElementById('subtotal').value = total.toFixed(2);
-            document.getElementById('total').value = total.toFixed(2);
+            document.getElementById('subtotal').value = total.toFixed(0);
+            document.getElementById('total').value = total.toFixed(0);
         }
 
         function buscarProducto() {
@@ -175,7 +175,7 @@
             var overlay = document.getElementById('overlay');
             var popup = document.getElementById('popup');
             var totalCobrar = parseFloat(document.getElementById('total').value);
-            document.getElementById('valorCobrar').value = totalCobrar.toFixed(2);
+            document.getElementById('valorCobrar').value = totalCobrar.toFixed(0);
             overlay.classList.remove('hidden');
             popup.classList.remove('hidden');
         }
@@ -185,36 +185,53 @@
             var popup = document.getElementById('popup');
             overlay.classList.add('hidden');
             popup.classList.add('hidden');
-            document.getElementById('cambio').innerText = '';  // Limpiar el cambio al cerrar
+            document.getElementById('cambio').innerText = "";  // Limpiar el campo del cambio
         }
 
         function calcularCambio() {
-            var valorCobrar = parseFloat(document.getElementById('valorCobrar').value);
+            var totalCobrar = parseFloat(document.getElementById('valorCobrar').value);
             var valorRecibido = parseFloat(document.getElementById('valorRecibido').value);
-            var cambio = valorRecibido - valorCobrar;
-            var cambioElement = document.getElementById('cambio');
-            if (!isNaN(cambio) && cambio >= 0) {
-                cambioElement.innerText = 'Cambio: $' + cambio.toFixed(2);
+            if (valorRecibido >= totalCobrar) {
+                var cambio = valorRecibido - totalCobrar;
+                document.getElementById('cambio').innerText = "Cambio: $" + cambio.toFixed(0);
+                document.getElementById('productosInput').value = JSON.stringify(obtenerProductos());
+                document.getElementById('subtotalInput').value = document.getElementById('subtotal').value;
+                document.getElementById('totalInput').value = document.getElementById('total').value;
+
+                // Llamar a la función para guardar la venta en la base de datos
+                registrarVenta();
             } else {
-                cambioElement.innerText = 'Valor recibido insuficiente';
+                alert('El valor recibido es menor al valor a cobrar.');
             }
         }
 
-        document.getElementById('popup').addEventListener('submit', function() {
+        function obtenerProductos() {
             var productos = [];
             var rows = document.getElementById('productosSeleccionados').getElementsByTagName('tr');
             for (var i = 0; i < rows.length; i++) {
                 var row = rows[i];
-                var nombre = row.cells[0].innerHTML;
-                var cantidad = row.cells[1].innerHTML;
-                var precioUnitario = row.cells[2].innerHTML;
-                var precioTotal = row.cells[3].innerHTML;
-                productos.push({ nombre: nombre, cantidad: cantidad, precioUnitario: precioUnitario, precioTotal: precioTotal });
+                productos.push({
+                    nombre: row.cells[0].innerHTML,
+                    cantidad: row.cells[1].innerHTML,
+                    precioUnitario: row.cells[2].innerHTML,
+                    precioTotal: row.cells[3].innerHTML
+                });
             }
-            document.getElementById('productosInput').value = JSON.stringify(productos);
-            document.getElementById('subtotalInput').value = document.getElementById('subtotal').value;
-            document.getElementById('totalInput').value = document.getElementById('total').value;
-        });
+            return productos;
+        }
+
+        function registrarVenta() {
+            var productos = obtenerProductos();
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/registrar_venta', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("Venta registrada con éxito");
+                }
+            };
+            xhr.send(JSON.stringify(productos));
+        }
     </script>
 </body>
 </html>

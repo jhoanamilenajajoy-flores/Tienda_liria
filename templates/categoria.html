@@ -11,8 +11,6 @@
         <nav>
             <a href="#" class="logo">Tienda Liria</a>
             <form action="#">
-                <input type="text" placeholder="Buscar producto">
-                <button type="submit"><i class="fas fa-search"></i></button>
             </form>
         </nav>
     </header>
@@ -21,30 +19,29 @@
         <aside>
             <h2>Categorías</h2>
             <ul>
-                <li><a href="#">Alimentación</a></li>
-                <li><a href="#">Hogar</a></li>
-                <li><a href="#">Cuidado Personal</a></li>
-                <li><a href="#">Papelería</a></li>
-                <li><a href="#">Mecatos</a></li>
-                <li><a href="#">Otros</a></li>
+                <li><a href="/alimentacion">Alimentación</a></li>
+                <li><a href="/hogar">Hogar</a></li>
+                <li><a href="/cuidadopersonal">Cuidado Personal</a></li>
+                <li><a href="/papeleria">Papelería</a></li>
+                <li><a href="/mecato">Mecatos</a></li>
+                <li><a href="/otros">Otros</a></li>
             </ul>
         </aside>
 
         <section>
             <h2>Productos Destacados</h2>
+            {% if producto %}
             <div class="producto">
-                <img src="img (2).jpg" alt="Producto 1" style="width: 200px; height: 200px;">
-                <h3>Arroz Diana</h3>
-                <p>$ 4100</p>
-                <button class="agregar">Agregar Producto</button>
+                <img src="data:image/jpeg;base64,{{ producto[2] }}" alt="{{ producto[0] }}" style="width: 200px; height: 200px;">
+                <h3>{{ producto[0] }}</h3>
+                <p>${{ producto[1] }}</p>
+                <a href="/guardarproducto"><button type="submit">Agregar Producto</button></a>
             </div>
-
-            
-
-            </section>
+            {% else %}
+            <p>No hay productos disponibles.</p>
+            {% endif %}
+        </section>
     </main>
-
-    
 
     <script src="script.js"></script>
 </body>

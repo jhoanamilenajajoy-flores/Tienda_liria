@@ -190,8 +190,8 @@ p {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px; /* Add optional button border radius */
-}
+  }
   
   .abonar:hover {
-    background-color: #0067cc; /* Button hover effect */
-}
+    background-color: #0067cc; /* Button hover effect */
+  }

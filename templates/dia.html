@@ -9,60 +9,42 @@
     <style>
         body {
             background-image: url('/static/images/paper-color.png');
-            background-size: cover; /* Para que la imagen de fondo cubra toda la pantalla */
-            background-position: center; /* Para centrar la imagen de fondo */
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
 <body>
     {% include 'navbar.html' %}  
     <div class="container">
-        <h1 >Reporte Diario de Ventas</h1>
-        <table class=" table table-color">
+        <h1>Reporte Diario de Ventas</h1>
+        <table class="table table-color">
             <thead class="table-dark">
                 <tr>
-                    <th>Días</th>
+                    <th>Día</th>
                     <th>Ventas</th>
                 </tr>
-            </thead>           
-            <tr>
-                <td><a href="dia_semana">Lunes</a></td>
-                <td>$500</td> <!-- Aquí iría el saldo de las ventas del lunes -->
-            </tr>
-            <tr>
-                <td><a href="dia_semana.html?dia=Martes">Martes</a></td>
-                <td>$700</td> <!-- Aquí iría el saldo de las ventas del martes -->
-            </tr>
-            <!-- Repite lo mismo para los demás días de la semana -->
-            <tr>
-                <td><a href="dia_semana.html?dia=Miércoles">Miércoles</a></td>
-                <td>$600</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td><a href="dia_semana.html?dia=Jueves">Jueves</a></td>
-                <td>$800</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td><a href="dia_semana.html?dia=Viernes">Viernes</a></td>
-                <td>$1000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td><a href="dia_semana.html?dia=Sábado">Sábado</a></td>
-                <td>$1200</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td><a href="dia_semana.html?dia=Domingo">Domingo</a></td>
-                <td>$900</td> <!-- Ejemplo -->
-            </tr>
-            <!-- Resumen con el total de las ventas -->
-            <tr>
-                <td>Total</td>
-                <td>$6300</td> <!-- Ejemplo: suma de todas las ventas -->
-            </tr>
+            </thead>
+            <tbody>
+                {% for venta in ventas %}
+                <tr>
+                    <td><a href="dia_semana?dia={{ venta[0] }}">{{ venta[0] }}</a></td>
+                    <td>${{ venta[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td>${{ ventas | sum(attribute=1) }}</td>
+                </tr>
+            </tfoot>
         </table>
     </div>
     <div class="btn-atras">
         <a href="/informes_venta"><button class="btn btn-secondary btn-lg">Atrás</button></a>
+        <a href="/download_recibo?tipo=dia"><button class="btn btn-primary btn-lg">Descargar Recibo</button></a>
+
     </div>
 </body>
 </html>

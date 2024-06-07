@@ -20,69 +20,30 @@
         <h1>Reporte Mensual de Ventas</h1>
         <table class="table table-color my-5">
             <thead class="table-dark">
-            <tr>
-                <th>Mes</th>
-                <th>Ventas</th>
-            </tr>
+                <tr>
+                    <th>Mes</th>
+                    <th>Ventas</th>
+                </tr>
             </thead>
-            <tr>
-                <td>Enero</td>
-                <td>$5000</td> <!-- Aquí iría el saldo de las ventas de enero -->
-            </tr>
-            <tr>
-                <td>Febrero</td>
-                <td>$6000</td> <!-- Aquí iría el saldo de las ventas de febrero -->
-            </tr>
-            <!-- Repite lo mismo para los demás meses del año -->
-            <tr>
-                <td>Marzo</td>
-                <td>$7000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Abril</td>
-                <td>$8000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Mayo</td>
-                <td>$9000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Junio</td>
-                <td>$10000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Julio</td>
-                <td>$11000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Agosto</td>
-                <td>$12000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Septiembre</td>
-                <td>$13000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Octubre</td>
-                <td>$14000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Noviembre</td>
-                <td>$15000</td> <!-- Ejemplo -->
-            </tr>
-            <tr>
-                <td>Diciembre</td>
-                <td>$16000</td> <!-- Ejemplo -->
-            </tr>
-            <!-- Resumen con el total de las ventas -->
-            <tr>
-                <td>Total</td>
-                <td>$126000</td> <!-- Ejemplo: suma de todas las ventas -->
-            </tr>
+            <tbody>
+                {% for venta in ventas %}
+                <tr>
+                    <td>{{ venta[0] }}</td>
+                    <td>${{ venta[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td>${{ ventas | sum(attribute=1) }}</td>
+                </tr>
+            </tfoot>
         </table>
     </div>
     <div class="btn-atras">
         <a href="/informes_venta"><button class="btn btn-secondary btn-lg">Atrás</button></a>
+
     </div>
 </body>
 </html>
