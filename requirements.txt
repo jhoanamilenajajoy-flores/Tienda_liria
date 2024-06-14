@@ -8,28 +8,600 @@ MarkupSafe==2.1.5
 mysql-connector-python==8.4.0
 pdfkit==1.0.0
 Werkzeug==3.0.2
-server {
-    listen 80;
-    server_name 192.168.1.7;  # Cambia esto a tu dirección IP o nombre de dominio
 
-    root /var/www/iredadmin;
-    index index.html index.htm index.php;
 
-    location / {
-        try_files $uri $uri/ =404;
-    }
 
-    location /iredadmin {
-        alias /usr/share/iredadmin;
-        index index.py;
-        include /etc/nginx/uwsgi_params;
-        uwsgi_pass 127.0.0.1:7791;
-    }
 
-    location ~ \.py$ {
-        include /etc/nginx/uwsgi_params;
-        uwsgi_pass 127.0.0.1:7791;
-    }
-}
-sudo ln -s /etc/nginx/sites-available/iredadmin.conf /etc/nginx/sites-enabled/
 
+
+
+
+
+
+
+
+
+
+
+
+
+* mariadb.service - MariaDB 10.6.16 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/mariadb.service.d
+             `-override.conf
+     Active: active (running) since Thu 2024-06-13 23:54:03 -05; 17min ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 47017 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+    Process: 47018 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47020 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`cd /usr/bin/..; /usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemctl>
+    Process: 47067 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47069 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+   Main PID: 47055 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 12 (limit: 3181)
+     Memory: 80.0M
+        CPU: 5.832s
+     CGroup: /system.slice/mariadb.service
+             `-47055 /usr/sbin/mariadbd
+
+jun 13 23:54:03 ubuntu mariadbd[47055]: Version: '10.6.16-MariaDB-0ubuntu0.22.04.1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Ubuntu 22.04
+jun 13 23:54:03 ubuntu systemd[1]: Started MariaDB 10.6.16 database server.
+jun 13 23:54:03 ubuntu mariadbd[47055]: 2024-06-13 23:54:03 0 [Note] InnoDB: Buffer pool(s) load completed at 240613 23:54:03
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb' as: /usr/bin/mariadb
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb-check' as: /usr/bin/mariadb-check
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: This installation of MariaDB is already upgraded to 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: There is no need to run mysql_upgrade again for 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: You can use --force if you still want to run mysql_upgrade
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47082]: Checking for insecure root accounts.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47086]: Triggering myisam-recover for all MyISAM tables and aria-recover for all Aria tables
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-30/30 (END)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* mariadb.service - MariaDB 10.6.16 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/mariadb.service.d
+             `-override.conf
+     Active: active (running) since Thu 2024-06-13 23:54:03 -05; 17min ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 47017 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+    Process: 47018 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47020 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`cd /usr/bin/..; /usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemctl >
+    Process: 47067 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47069 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+   Main PID: 47055 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 12 (limit: 3181)
+     Memory: 80.0M
+        CPU: 5.832s
+     CGroup: /system.slice/mariadb.service
+             `-47055 /usr/sbin/mariadbd
+
+jun 13 23:54:03 ubuntu mariadbd[47055]: Version: '10.6.16-MariaDB-0ubuntu0.22.04.1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Ubuntu 22.04
+jun 13 23:54:03 ubuntu systemd[1]: Started MariaDB 10.6.16 database server.
+jun 13 23:54:03 ubuntu mariadbd[47055]: 2024-06-13 23:54:03 0 [Note] InnoDB: Buffer pool(s) load completed at 240613 23:54:03
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb' as: /usr/bin/mariadb
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb-check' as: /usr/bin/mariadb-check
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: This installation of MariaDB is already upgraded to 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: There is no need to run mysql_upgrade again for 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: You can use --force if you still want to run mysql_upgrade
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47082]: Checking for insecure root accounts.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47086]: Triggering myisam-recover for all MyISAM tables and aria-recover for all Aria tables
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-30/30 (END)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* mariadb.service - MariaDB 10.6.16 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/mariadb.service.d
+             `-override.conf
+     Active: active (running) since Thu 2024-06-13 23:54:03 -05; 17min ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 47017 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+    Process: 47018 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47020 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`cd /usr/bin/..; /usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemctl s>
+    Process: 47067 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47069 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+   Main PID: 47055 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 12 (limit: 3181)
+     Memory: 80.0M
+        CPU: 5.832s
+     CGroup: /system.slice/mariadb.service
+             `-47055 /usr/sbin/mariadbd
+
+jun 13 23:54:03 ubuntu mariadbd[47055]: Version: '10.6.16-MariaDB-0ubuntu0.22.04.1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Ubuntu 22.04
+jun 13 23:54:03 ubuntu systemd[1]: Started MariaDB 10.6.16 database server.
+jun 13 23:54:03 ubuntu mariadbd[47055]: 2024-06-13 23:54:03 0 [Note] InnoDB: Buffer pool(s) load completed at 240613 23:54:03
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb' as: /usr/bin/mariadb
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb-check' as: /usr/bin/mariadb-check
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: This installation of MariaDB is already upgraded to 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: There is no need to run mysql_upgrade again for 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: You can use --force if you still want to run mysql_upgrade
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47082]: Checking for insecure root accounts.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47086]: Triggering myisam-recover for all MyISAM tables and aria-recover for all Aria tables
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-30/30 (END)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* mariadb.service - MariaDB 10.6.16 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/mariadb.service.d
+             `-override.conf
+     Active: active (running) since Thu 2024-06-13 23:54:03 -05; 17min ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 47017 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+    Process: 47018 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47020 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`cd /usr/bin/..; /usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemctl se>
+    Process: 47067 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47069 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+   Main PID: 47055 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 12 (limit: 3181)
+     Memory: 80.0M
+        CPU: 5.832s
+     CGroup: /system.slice/mariadb.service
+             `-47055 /usr/sbin/mariadbd
+
+jun 13 23:54:03 ubuntu mariadbd[47055]: Version: '10.6.16-MariaDB-0ubuntu0.22.04.1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Ubuntu 22.04
+jun 13 23:54:03 ubuntu systemd[1]: Started MariaDB 10.6.16 database server.
+jun 13 23:54:03 ubuntu mariadbd[47055]: 2024-06-13 23:54:03 0 [Note] InnoDB: Buffer pool(s) load completed at 240613 23:54:03
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb' as: /usr/bin/mariadb
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb-check' as: /usr/bin/mariadb-check
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: This installation of MariaDB is already upgraded to 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: There is no need to run mysql_upgrade again for 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: You can use --force if you still want to run mysql_upgrade
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47082]: Checking for insecure root accounts.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47086]: Triggering myisam-recover for all MyISAM tables and aria-recover for all Aria tables
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-30/30 (END)...skipping...
+* mariadb.service - MariaDB 10.6.16 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/mariadb.service.d
+             `-override.conf
+     Active: active (running) since Thu 2024-06-13 23:54:03 -05; 17min ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 47017 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+    Process: 47018 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47020 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`cd /usr/bin/..; /usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemctl set-envir>
+    Process: 47067 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47069 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+   Main PID: 47055 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 12 (limit: 3181)
+     Memory: 80.0M
+        CPU: 5.832s
+     CGroup: /system.slice/mariadb.service
+             `-47055 /usr/sbin/mariadbd
+
+jun 13 23:54:03 ubuntu mariadbd[47055]: Version: '10.6.16-MariaDB-0ubuntu0.22.04.1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Ubuntu 22.04
+jun 13 23:54:03 ubuntu systemd[1]: Started MariaDB 10.6.16 database server.
+jun 13 23:54:03 ubuntu mariadbd[47055]: 2024-06-13 23:54:03 0 [Note] InnoDB: Buffer pool(s) load completed at 240613 23:54:03
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb' as: /usr/bin/mariadb
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb-check' as: /usr/bin/mariadb-check
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: This installation of MariaDB is already upgraded to 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: There is no need to run mysql_upgrade again for 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: You can use --force if you still want to run mysql_upgrade
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47082]: Checking for insecure root accounts.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47086]: Triggering myisam-recover for all MyISAM tables and aria-recover for all Aria tables
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+lines 1-30/30 (END)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* mariadb.service - MariaDB 10.6.16 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/mariadb.service.d
+             `-override.conf
+     Active: active (running) since Thu 2024-06-13 23:54:03 -05; 17min ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 47017 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+    Process: 47018 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47020 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`cd /usr/bin/..; /usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemctl set>
+    Process: 47067 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47069 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+   Main PID: 47055 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 12 (limit: 3181)
+     Memory: 80.0M
+        CPU: 5.832s
+     CGroup: /system.slice/mariadb.service
+             `-47055 /usr/sbin/mariadbd
+
+jun 13 23:54:03 ubuntu mariadbd[47055]: Version: '10.6.16-MariaDB-0ubuntu0.22.04.1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Ubuntu 22.04
+jun 13 23:54:03 ubuntu systemd[1]: Started MariaDB 10.6.16 database server.
+jun 13 23:54:03 ubuntu mariadbd[47055]: 2024-06-13 23:54:03 0 [Note] InnoDB: Buffer pool(s) load completed at 240613 23:54:03
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb' as: /usr/bin/mariadb
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb-check' as: /usr/bin/mariadb-check
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: This installation of MariaDB is already upgraded to 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: There is no need to run mysql_upgrade again for 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: You can use --force if you still want to run mysql_upgrade
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47082]: Checking for insecure root accounts.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47086]: Triggering myisam-recover for all MyISAM tables and aria-recover for all Aria tables
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+root@ubuntu:/home/vboxuser# ^C
+root@ubuntu:/home/vboxuser# sudo systemctl status nginx
+* nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2024-06-13 23:53:31 -05; 19min ago
+       Docs: man:nginx(8)
+    Process: 46934 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 46936 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+   Main PID: 46937 (nginx)
+      Tasks: 2 (limit: 3181)
+     Memory: 6.7M
+        CPU: 1.169s
+     CGroup: /system.slice/nginx.service
+             |-46937 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
+             `-46938 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" ""
+
+jun 13 23:53:31 ubuntu systemd[1]: Starting A high performance web server and a reverse proxy server...
+jun 13 23:53:31 ubuntu systemd[1]: Started A high performance web server and a reverse proxy server.
+root@ubuntu:/home/vboxuser# sudo systemctl status postfix
+* postfix.service - Postfix Mail Transport Agent
+     Loaded: loaded (/lib/systemd/system/postfix.service; enabled; vendor preset: enabled)
+     Active: active (exited) since Thu 2024-06-13 23:40:25 -05; 32min ago
+       Docs: man:postfix(1)
+    Process: 46459 ExecStart=/bin/true (code=exited, status=0/SUCCESS)
+   Main PID: 46459 (code=exited, status=0/SUCCESS)
+        CPU: 9ms
+
+jun 13 23:40:25 ubuntu systemd[1]: Starting Postfix Mail Transport Agent...
+jun 13 23:40:25 ubuntu systemd[1]: Finished Postfix Mail Transport Agent.
+root@ubuntu:/home/vboxuser# sudo systemctl status postfix
+* postfix.service - Postfix Mail Transport Agent
+     Loaded: loaded (/lib/systemd/system/postfix.service; enabled; vendor preset: enabled)
+     Active: active (exited) since Thu 2024-06-13 23:40:25 -05; 32min ago
+       Docs: man:postfix(1)
+    Process: 46459 ExecStart=/bin/true (code=exited, status=0/SUCCESS)
+   Main PID: 46459 (code=exited, status=0/SUCCESS)
+        CPU: 9ms
+
+jun 13 23:40:25 ubuntu systemd[1]: Starting Postfix Mail Transport Agent...
+jun 13 23:40:25 ubuntu systemd[1]: Finished Postfix Mail Transport Agent.
+root@ubuntu:/home/vboxuser# sudo systemctl status dovecot
+* dovecot.service - Dovecot IMAP/POP3 email server
+     Loaded: loaded (/lib/systemd/system/dovecot.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2024-06-13 23:40:24 -05; 32min ago
+       Docs: man:dovecot(1)
+             https://doc.dovecot.org/
+   Main PID: 46322 (dovecot)
+     Status: "v2.3.16 (7e2e900c1a) running"
+      Tasks: 10 (limit: 3181)
+     Memory: 12.5M
+        CPU: 374ms
+     CGroup: /system.slice/dovecot.service
+             |-46322 /usr/sbin/dovecot -F
+             |-46342 dovecot/lmtp -L
+             |-46343 dovecot/anvil
+             |-46344 dovecot/log
+             |-46345 dovecot/lmtp -L
+             |-46346 dovecot/lmtp -L
+             |-46347 dovecot/lmtp -L
+             |-46348 dovecot/lmtp -L
+             |-46352 dovecot/config
+             `-46354 dovecot/stats
+
+jun 13 23:40:24 ubuntu systemd[1]: Starting Dovecot IMAP/POP3 email server...
+jun 13 23:40:24 ubuntu dovecot[46322]: master: Dovecot v2.3.16 (7e2e900c1a) starting up for pop3, imap, sieve, lmtp (core dumps disabled)
+jun 13 23:40:24 ubuntu systemd[1]: Started Dovecot IMAP/POP3 email server.
+root@ubuntu:/home/vboxuser# sudo systemctl status mariadb
+* mariadb.service - MariaDB 10.6.16 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/mariadb.service.d
+             `-override.conf
+     Active: active (running) since Thu 2024-06-13 23:54:03 -05; 19min ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 47017 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+    Process: 47018 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47020 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`cd /usr/bin/..; /usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemctl set>
+    Process: 47067 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 47069 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+   Main PID: 47055 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 11 (limit: 3181)
+     Memory: 80.0M
+        CPU: 5.910s
+     CGroup: /system.slice/mariadb.service
+             `-47055 /usr/sbin/mariadbd
+
+jun 13 23:54:03 ubuntu mariadbd[47055]: Version: '10.6.16-MariaDB-0ubuntu0.22.04.1'  socket: '/run/mysqld/mysqld.sock'  port: 3306  Ubuntu 22.04
+jun 13 23:54:03 ubuntu systemd[1]: Started MariaDB 10.6.16 database server.
+jun 13 23:54:03 ubuntu mariadbd[47055]: 2024-06-13 23:54:03 0 [Note] InnoDB: Buffer pool(s) load completed at 240613 23:54:03
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb' as: /usr/bin/mariadb
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: Looking for 'mariadb-check' as: /usr/bin/mariadb-check
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: This installation of MariaDB is already upgraded to 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: There is no need to run mysql_upgrade again for 10.6.16-MariaDB.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47074]: You can use --force if you still want to run mysql_upgrade
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47082]: Checking for insecure root accounts.
+jun 13 23:54:04 ubuntu /etc/mysql/debian-start[47086]: Triggering myisam-recover for all MyISAM tables and aria-recover for all Aria tables
+lines 1-30/30 (END)
